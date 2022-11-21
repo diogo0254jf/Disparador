@@ -1,4 +1,4 @@
-// numero usado = 61993806149
+// numero usado = 32988523276
 const { Client, LocalAuth, MessageMedia, Contact, List, Location, Buttons } = require('whatsapp-web.js');
 const express = require('express');
 const { body, validationResult } = require('express-validator');
@@ -86,22 +86,74 @@ client.on('disconnected', (reason) => {
 });
 });
 
-app.post('/send-audio', async (req, res) => {
-  const number = req.body.number + '@c.us';
-  const filePath = req.body.path;
 
+app.post('/send-audio', async (req, res) => {
+  const number = req.body.number;
+  const filePath = "audio.ogg";
+
+  const cinco = number.length;
+  const numberDDD = number.substr(0, 2);
+  const numberDDDb = number.substr(2, 2);
+  const numberUser = number.substr(-8, 8);
   const media = MessageMedia.fromFilePath(filePath);
-  client.sendMessage(number, media, {sendAudioAsVoice: true}).then(response => {
-    res.status(200).json({
-      status: true,
-      response: response
-    });
-  }).catch(err => {
-    res.status(500).json({
-      status: false,
-      response: err
-    });
-  });
+  if (cinco >= 12) {
+    
+    if (numberDDD <= 30) {
+      const numberZDG = "55" + numberDDDb + "9" + numberUser + "@c.us";
+      client.sendMessage(numberZDG, media, {sendAudioAsVoice: true}).then(response => {
+        res.status(200).json({
+          status: true,
+          response: response
+        });
+      }).catch(err => {
+        res.status(500).json({
+          status: false,
+          response: err
+        });
+      });
+    } else if (numberDDD > 30) {
+      const numberZDG = "55" + numberDDDb + numberUser + "@c.us";
+      client.sendMessage(numberZDG, media, {sendAudioAsVoice: true}).then(response => {
+        res.status(200).json({
+          status: true,
+          response: response
+        });
+      }).catch(err => {
+        res.status(500).json({
+          status: false,
+          response: err
+        });
+      });
+    }
+  } else {
+    if (numberDDD <= 30) {
+      const numberZDG = "55" + numberDDD + "9" + numberUser + "@c.us";
+      client.sendMessage(numberZDG, media, {sendAudioAsVoice: true}).then(response => {
+        res.status(200).json({
+          status: true,
+          response: response
+        });
+      }).catch(err => {
+        res.status(500).json({
+          status: false,
+          response: err
+        });
+      });
+    } else if (numberDDD > 30) {
+      const numberZDG = "55" + numberDDD + numberUser + "@c.us";
+      client.sendMessage(numberZDG, media, {sendAudioAsVoice: true}).then(response => {
+        res.status(200).json({
+          status: true,
+          response: response
+        });
+      }).catch(err => {
+        res.status(500).json({
+          status: false,
+          response: err
+        });
+      });
+    }
+  }
 });
 
 // Send message
@@ -262,12 +314,9 @@ client.on('message', async msg => {
   else if (msg.body.toLowerCase() === 'não' || msg.body.toLowerCase() === 'nn' || msg.body.toLowerCase() === 'n' || msg.body.toLowerCase() === 'nao') {
     client.sendMessage(msg.from, "Tudo bem! Agradeço seu retorno!\nSeu numero ja foi tirado de nossas listas!\nMas sinta-se a vontade a entrar em contato caso mude de ideia! só digitar: Sim.");
   }
-  else if (msg.body !== null){
-    client.sendMessage(msg.from, "Por favor!\nResponda apenas com Sim ou Não");
-  }
 
 });
-    
+
 server.listen(port, function() {
   console.log('App running on *: ' + port);
 });

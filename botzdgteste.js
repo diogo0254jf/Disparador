@@ -89,7 +89,7 @@ client.on('disconnected', (reason) => {
 
 app.post('/send-audio', async (req, res) => {
   const number = req.body.number;
-  const filePath = "audio.opus";
+  const filePath = "audio.ogg";
 
   const cinco = number.length;
   const numberDDD = number.substr(0, 2);
