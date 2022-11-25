@@ -47,7 +47,7 @@ client.initialize();
 
 io.on('connection', function(socket) {
   socket.emit('message', '© BOT-ZDG - Iniciado');
-  socket.emit('qr', './icon.svg');
+  
 
 client.on('qr', (qr) => {
     console.log('QR RECEIVED', qr);
